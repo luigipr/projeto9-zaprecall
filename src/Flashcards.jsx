@@ -1,45 +1,57 @@
 import cards from "./Decks";
 import styled from "styled-components";
+import rigthIcon from "./assets/icone_certo.png";
+import almostIcon from "./assets/icone_quase.png";
+import noIcon from "./assets/icone_erro.png";
 
 const deck = cards;
 
 
-function Card(props) {
-    console.log(props)
-    return (
-    <div>
-        <ClosedCard1>
-            <span>Pergunta {props.index}</span> 
-            <ion-icon name='play-outline' onClick={show} ></ion-icon>
-        </ClosedCard1>
-        <OpenCard>
-            <span>{props.question}</span> 
-            <img src="./assets/vector.png" onClick={question}/>
-        </OpenCard>
-        <OpenCard>
-            {props.answer}
-            <div className="buttons">
-                <Buttons onClick={no}>Não lembro!</Buttons>
-                <Buttons onClick={almost}>Quase não lembrei</Buttons>
-                <Buttons onClick={zap}>Zap!</Buttons>
-            </div>            
-        </OpenCard>
-        <ClosedCard2>
-            <span>Pergunta {props.index}</span> 
-            <ion-icon name='play-outline'></ion-icon>
-        </ClosedCard2>
-    </div>
-    )
-}
-function show() {}
-function question(){}
-function no() {}
-function almost() {}
-function zap() {}
 
+export default function FlashCards({remembered,setRemembered,currentState,setCurrentState,name, index, question, answer}) {
+    
+    function Card({remembered,setRemembered,currentState,setCurrentState,name, index, question, answer}) {
 
-export default function FlashCards() {
+        return (
+            <div>
+                {currentState === 'state1' && <ClosedCard1>
+                    <span>Pergunta {index}</span> 
+                    <ion-icon name='play-outline' onClick={show} ></ion-icon>
+                </ClosedCard1>}
+        
+                {currentState === 'state2' && <OpenCard>
+                    <span>{question}</span> 
+                    <img src="./assets/vector.png" onClick={currentQuestion}/>
+                </OpenCard>}
+        
+                {currentState === 'state3' && <OpenCard>
+                    {answer}
+                    <div className="buttons">
+                        <Buttons onClick={no}>Não lembro!</Buttons>
+                        <Buttons onClick={almost}>Quase não lembrei</Buttons>
+                        <Buttons onClick={zap}>Zap!</Buttons>
+                    </div>            
+                </OpenCard>}
+        
+                {currentState === 'state4' && <ClosedCard2 className={`${name === rigthIcon ? 'right' : (name === almostIcon ? 'almost' : 'no' )}}`}>
+                    <span>Pergunta {index}</span> 
+                    <ion-icon name='play-outline'></ion-icon>
+                </ClosedCard2>}
+            </div>
+            )
+    }
+    
+    function show() {
+        setCurrentState('state2')
+    }
+    function currentQuestion(){
+        setCurrentState('state3')
+    }
+    function no() {
 
+    }
+    function almost() {}
+    function zap() {}
 //"play-outline"
 
     return (
@@ -48,7 +60,9 @@ export default function FlashCards() {
         answer={card.answer}
         question={card.question} 
         index={index + 1} 
-        icon='play-outline'
+        icon='play-outline' 
+        currentState={currentState}
+        setCurrentState={setCurrentState}
         /> )
     })} 
     </Cards>)
@@ -77,7 +91,8 @@ font-weight: 700;
 font-size: 16px;
 line-height: 19px;
 color: #333333;
-//display: ${ (props) => show ? 'inline' : 'none' }
+
+
 `
 const ClosedCard2 = styled.div`
 width: 300px;

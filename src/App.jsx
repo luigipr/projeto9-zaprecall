@@ -1,5 +1,5 @@
 import Front from './Front'
-import './App.css'
+
 
 function App() {
   

@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import logo from './assets/logo.png'
 import FlashCards from './Flashcards'
 import Footer from './Footer'
 import styled from 'styled-components'
+import Decks from './Decks'
 
 export default function Front() {
+    const [remembered, setRemembered] = useState(0)
+    const [currentState, setCurrentState] = useState('state1')
 
     return (
         <Page>
@@ -11,8 +15,8 @@ export default function Front() {
                 <img  src={logo} />
                 <p>ZapRecall</p>
             </Header>
-            <FlashCards />
-            <Footer />
+            <FlashCards remembered={remembered} setRemembered={setRemembered} currentState={currentState} setCurrentState={setCurrentState} Decks={Decks}/>
+            <Footer remembered={remembered}/>
         </Page>
     )
 
@@ -30,6 +34,7 @@ const Header = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 30px;
     
     p {
         width: 203px;
