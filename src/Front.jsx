@@ -7,7 +7,7 @@ import Decks from './Decks'
 
 export default function Front() {
     const [remembered, setRemembered] = useState(0)
-    const [currentState, setCurrentState] = useState('state1')
+    
 
     return (
         <Page>
@@ -15,7 +15,7 @@ export default function Front() {
                 <img  src={logo} />
                 <p>ZapRecall</p>
             </Header>
-            <FlashCards remembered={remembered} setRemembered={setRemembered} currentState={currentState} setCurrentState={setCurrentState} Decks={Decks}/>
+            <FlashCards remembered={remembered} setRemembered={setRemembered}Decks={Decks}/>
             <Footer remembered={remembered}/>
         </Page>
     )
