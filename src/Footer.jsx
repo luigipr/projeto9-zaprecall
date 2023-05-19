@@ -5,7 +5,7 @@ export default function Footer({remembered}) {
 
     return (
         <End>
-            <p> {remembered}/8 CONCLUÍDOS</p>
+            <p data-test="footer"> {remembered}/8 CONCLUÍDOS</p>
         </End>
     )
 
