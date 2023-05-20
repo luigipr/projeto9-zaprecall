@@ -7,22 +7,28 @@ import { useState } from "react";
 import noIcon from "./assets/icone_erro.png";
 
 
-export default function Card({remembered,setRemembered,name, index, question, answer}) {
+export default function Card({remembered,setRemembered,name, index, question, answer, open, setOpen}) {
 
-
+    const [datatest, setDatatest] = useState('')
     const [currentState, setCurrentState] = useState('state1')
     const [icon, setIcon] = useState('')
 
     function show() {
         setCurrentState('state2')
+        console.log(open)
+        setOpen(true)
+        console.log(open)
     }
     function currentQuestion(){
         setCurrentState('state3')
+        console.log(open)
     }
     function no() {
         setCurrentState('state4')
         console.log(remembered)
         setIcon(noIcon)
+        setOpen(false)
+        setDatatest('no-icon')
     }
     function almost() {
         setIcon(almostIcon)
@@ -30,17 +36,22 @@ export default function Card({remembered,setRemembered,name, index, question, an
         let current = remembered
         console.log(current)
         setRemembered(current+1);
+        setOpen(false);
+        setDatatest('partial-icon')
     }
     function zap() {
         setIcon(rigthIcon)
         console.log(remembered)
         setCurrentState('state4')
         setRemembered(remembered +1);
+        setOpen(false)
+        setDatatest('zap-icon')
         //Button += 
     }
 
     return (
-        <div data-test='flshcard'>
+        <div data-test='flashcard'>
+
             {currentState === 'state1' && <ClosedCard1>
                 <span data-test="flashcard-text">Pergunta {index}</span> 
                 <img src={setaPlay} data-test="play-btn" onClick={show} alt="setaplay" />
@@ -48,22 +59,23 @@ export default function Card({remembered,setRemembered,name, index, question, an
     
             {currentState === 'state2' && <OpenCard>
                 <span data-test="flashcard-text">{question}</span> 
-                <img src={vector} onClick={currentQuestion} alt='vector'/>
+                <img src={vector} data-test="turn-btn" onClick={currentQuestion} alt='vector'/>
             </OpenCard>}
     
             {currentState === 'state3' && <OpenCard>
                 <p data-test="flashcard-text">{answer}</p>
                 <Buttons>
-                    <Button selected='red' onClick={no}>Não lembro!</Button>
-                    <Button selected='orange' onClick={almost}>Quase não lembrei</Button>
-                    <Button selected='green' onClick={zap}>Zap!</Button>
+                    <Button selected='red'  data-test="no-btn" onClick={no}>Não lembro!</Button>
+                    <Button selected='orange' data-test="partial-btn" onClick={almost}>Quase não lembrei</Button>
+                    <Button selected='green' data-test="zap-btn" onClick={zap}>Zap!</Button>
                 </Buttons>            
             </OpenCard>}
     
             {currentState === 'state4' && <ClosedCard2 color={`${icon === rigthIcon ? 'green' : (icon === almostIcon ? 'orange' : 'red' )}`}>
                 <span data-test="flashcard-text">Pergunta {index}</span> 
-                <img src={icon} alt="setaplay" />
+                <img src={icon} data-test={datatest} alt="setaplay" />
             </ClosedCard2>}
+
         </div>            
 
         )
@@ -136,11 +148,12 @@ line-height: 22px;
 color: #333333;
 img{
     position: absolute;
-width: 30px;
-height: 20px;
-right: 5px;
-bottom:5px;
+    width: 30px;
+    height: 20px;
+    right: 5px;
+    bottom:5px;
 }
+
 `
 const Button = styled.button`
 width: 85.17px;

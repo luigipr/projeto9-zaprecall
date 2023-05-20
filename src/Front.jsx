@@ -26,7 +26,7 @@ export default function Front() {
 const Page = styled.div`
 box-sizing: border-box;
 width: 375px;
-height: 100vh;
+height: 100%;
 background: #FB6B6B;
 `
 
