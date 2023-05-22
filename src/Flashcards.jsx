@@ -5,8 +5,6 @@ import { useState } from "react";
 
 const deck = cards;
 
-
-
 export default function FlashCards({remembered,setRemembered,name, index, question, answer}) { 
    
     const [open, setOpen] = useState(false)

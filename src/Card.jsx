@@ -27,6 +27,7 @@ export default function Card({remembered,setRemembered,name, index, question, an
         setCurrentState('state4')
         console.log(remembered)
         setIcon(noIcon)
+        setRemembered(remembered+1);
         setOpen(false)
         setDatatest('no-icon')
     }
@@ -104,8 +105,8 @@ font-weight: 700;
 font-size: 16px;
 line-height: 19px;
 color: #333333;
-
 `
+
 const ClosedCard2 = styled.div`
 width: 300px;
 height: 65px;
@@ -125,6 +126,7 @@ font-size: 16px;
 line-height: 19px;
 text-decoration-line: line-through;
 color: ${props => props.color}
+
 `
 
 
@@ -153,8 +155,8 @@ img{
     right: 5px;
     bottom:5px;
 }
-
 `
+
 const Button = styled.button`
 width: 85.17px;
 height: 37.17px;

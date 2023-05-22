@@ -7,7 +7,7 @@ import Decks from './Decks'
 
 export default function Front() {
     const [remembered, setRemembered] = useState(0)
-    
+
 
     return (
         <Page>
